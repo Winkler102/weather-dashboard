@@ -44,3 +44,25 @@ height: 50px;
     margin-top: 15px;
     padding-top: 15px;
 }
+
+/* UV Styles */
+
+.lowUV {
+    background-color: lightgreen;
+}
+
+.moderateUV {
+    background-color: yellow;
+}
+
+.highUV {
+    background-color: orange;
+}
+
+.veryHighUV {
+    background-color: red;
+}
+
+.extremeUV {
+    background-color: purple;
+}

@@ -55,6 +55,18 @@ let displayCurrent = function () {
     $('#humidCurrent').append(humidity);
     $('#uviCurrent').append(uvIndex);
 
+    if (uvIndex < 3) {
+        $('#uviCurrent').addClass('lowUV')
+    } else if (uvIndex < 6) {
+        $('#uviCurrent').addClass('moderateUV')
+    } else if (uvIndex < 8) {
+        $('#uviCurrent').addClass('highUV')
+    } else if (uvIndex < 11) {
+        $('#uviCurrent').addClass('veryHighUV')
+    } else {
+        $('#uviCurrent').addClass('extremeUV')
+    }
+
 
     $('#iconCurrent')
         .addClass('iconCurrentImg')
