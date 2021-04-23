@@ -16,8 +16,39 @@
     </header>
     <div class="container">
         <div class="row">
-            <form class="col-3">Filler text</form>
-            <main class="col-9">Filler test</main>
+            <div class="col-4">
+                <p>
+                <h3 class="search-header">Search for A City:</h3>
+                </p>
+                <form id="cityNameForm" class="m-2">
+                    <input id="cityNameInput" class="textinput" type="text" placeholder="Enter City Name">
+                    <br><br>
+                    <input type="submit" value="Search" id="submit" class="btn bg-primary text-white"></input>
+                </form>
+                <ul class="search-history"></ul>
+            </div>
+            <main class="col-8">
+                <div class="row align-items-center border border-primary">
+                    <div class="col">
+                        <h3 id="cityName"></h3>
+                        <h3 id="dateCurrent"></h3>
+                        <br>
+                        <h5>Temperature: <span id="tempCurrent"></span>&deg;F</h5>
+                        <h5>Wind Speed: <span id="windCurrent"></span> MPH</h5>
+                        <h5>Humidity: <span id="humidCurrent"></span>%</h5>
+                        <h5>UV Index: <span id="uviCurrent"></span></h5>
+                    </div>
+                    <div class="col">
+                        <img id="iconCurrent" class="iconCurrent"></img>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2>7-Day forecast:</h2>
+                </div>
+                <div class="row align-items-center">
+                    <Ul id="forecastList" class="forecastList"></Ul>
+                </div>
+            </main>
         </div>
     </div>
 
