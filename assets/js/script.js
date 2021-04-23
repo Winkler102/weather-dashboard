@@ -4,7 +4,7 @@ let fetchWeatherData = function (city) {
     console.log(city);
 
     // fetch location Longitude and latitude
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=889b46e79741b547a80f6dcc38bdd6e3&units=imperial')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=889b46e79741b547a80f6dcc38bdd6e3&units=imperial')
         .then(function (response) { return response.json(); })
         .then(function (response) {
             longitude = response.coord.lon;
@@ -21,7 +21,7 @@ let fetchWeatherData = function (city) {
                     windSpeed = weather.current.wind_speed;
                     humidity = weather.current.humidity;
                     uvIndex = weather.current.uvi;
-                    iconLink = "http://openweathermap.org/img/wn/" + weather.current.weather[0].icon + "@2x.png"
+                    iconLink = "https://openweathermap.org/img/wn/" + weather.current.weather[0].icon + "@2x.png"
 
                     // Diplay weather info
                     displayCurrent();
@@ -29,7 +29,7 @@ let fetchWeatherData = function (city) {
                     // Get info for 7 day forecast by loop
                     for (i = 1; i < weather.daily.length; i++) {
                         dateWeek = moment().add((i), 'days').format("MMMM Do, YYYY");
-                        iconLinkWeek = "http://openweathermap.org/img/wn/" + weather.daily[i].weather[0].icon + "@2x.png"
+                        iconLinkWeek = "https://openweathermap.org/img/wn/" + weather.daily[i].weather[0].icon + "@2x.png"
                         temperatureWeek = weather.daily[i].temp.day + " F";
                         windSpeedWeek = weather.daily[i].wind_speed + " MPH";
                         humidityWeek = weather.daily[i].humidity + " %";
@@ -95,9 +95,12 @@ let getCityName = function () {
     console.log(cityHistory);
     return cityNameInputEl;
 }
+
 displayDate();
 
-$("#cityNameForm").submit(function () {
+$("#cityNameForm").submit(function (event) {
+    event.preventDefault();
     clearAll();
-    fetchWeatherData(getCityName();)
-})
+    fetchWeatherData(getCityName());
+    $('#cityNameInput').val('');
+});
