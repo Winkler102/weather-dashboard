@@ -20,10 +20,10 @@ let fetchWeatherData = function (city) {
 
                     iconCurrent = document.createElement('img');
                     iconCurrent.src = iconLink;
-                    $('#icon').append(iconCurrent);
+                    // $('#icon').append(iconCurrent);
 
-                    for (i = 0; i < weather.daily.length; i++) {
-                        date = moment().add((i + 1), 'days').format("MMMM Do, YYYY");
+                    for (i = 1; i < weather.daily.length; i++) {
+                        date = moment().add((i), 'days').format("MMMM Do, YYYY");
                         iconLink = "http://openweathermap.org/img/wn/" + weather.daily[i].weather[0].icon + "@2x.png"
                         temperatureWeek = weather.daily[i].temp.day;
                         windSpeedWeek = weather.daily[i].wind_speed;
