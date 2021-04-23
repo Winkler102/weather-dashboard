@@ -1,7 +1,6 @@
 let cityHistory = [];
 
 let fetchWeatherData = function (city) {
-    console.log(city);
 
     // fetch location Longitude and latitude
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=889b46e79741b547a80f6dcc38bdd6e3&units=imperial')
@@ -92,10 +91,28 @@ let clearAll = function () {
 let getCityName = function () {
     cityNameInputEl = $("#cityNameInput").val();
     cityHistory.push(cityNameInputEl)
-    console.log(cityHistory);
+    saveHistory(cityNameInputEl);
     return cityNameInputEl;
 }
 
+let saveHistory = function () {
+    let clearDulpicates = new Set(cityHistory)
+    cityHistory = Array.from(clearDulpicates);
+    localStorage.setItem("history", JSON.stringify(cityHistory))
+}
+
+let loadHistory = function () {
+    cityHistory = localStorage.getItem("history");
+    if (cityHistory) {
+        cityHistory = JSON.parse(cityHistory);
+        arrayFinalIndex = cityHistory.length - 1;
+        fetchWeatherData(cityHistory[arrayFinalIndex]);
+    } else {
+        cityHistory = [];
+    }
+}
+
+loadHistory();
 displayDate();
 
 $("#cityNameForm").submit(function (event) {
