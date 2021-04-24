@@ -1,7 +1,7 @@
 # Weather Dashboard
 
 ## Description 
-A website that will give the 5 day forcast for a city of choice.
+A website that will give the current day forcast and the 7-day forecast for a city of choice.
 
 
 ## Website Link
