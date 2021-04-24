@@ -42,9 +42,12 @@ let fetchWeatherData = function (city) {
                             }
                         });
                 });
+                // display search history after a search
                 displayHistory();
+                // save last seen so that it will pull up when opening site
                 localStorage.setItem("lastSeen", city)
             } else {
+                // check for errors
                 alert("Error: City " + response.statusText);
                 cityHistory.pop();
                 saveHistory();
@@ -53,17 +56,19 @@ let fetchWeatherData = function (city) {
             }
 
         })
+        // handling for no connection
         .catch(function (error) {
-            // Notice this `.catch()` getting chained onto the end of the `.then()` method
             alert("Unable to connect to Open Weather");
         });
 }
 
+// displays date for current day
 let displayDate = function () {
     currentDate = moment().format("MMMM Do, YYYY");
     $('#dateCurrent').append(currentDate);
 }
 
+// displays info for current weather
 let displayCurrent = function () {
     $('#cityName').append(cityName);
     $('#tempCurrent').append(temperature);
@@ -90,6 +95,7 @@ let displayCurrent = function () {
 
 }
 
+// displays info for 7-day forecast
 let addForecastList = function () {
     $('#forecastList').append("<li class='row day" + i + "'></li>")
 
@@ -107,6 +113,7 @@ let addForecastList = function () {
     }
 }
 
+// clears info for new information
 let clearAll = function () {
     $('#cityName').empty();
     $('#tempCurrent').empty();
@@ -116,6 +123,7 @@ let clearAll = function () {
     $('#forecastList').empty();
 };
 
+// gets city name from input box
 let getCityName = function () {
     cityNameInputEl = $("#cityNameInput").val();
     cityHistory.push(cityNameInputEl)
@@ -123,11 +131,13 @@ let getCityName = function () {
     return cityNameInputEl;
 }
 
+// save search history data
 let saveHistory = function () {
     removeDuplicates();
     localStorage.setItem("history", JSON.stringify(cityHistory))
 }
 
+// load search history data
 let loadHistory = function () {
     cityHistory = localStorage.getItem("history");
     if (cityHistory) {
@@ -140,11 +150,13 @@ let loadHistory = function () {
     displayHistory();
 }
 
+// prevents duplicate entrys into search history 
 let removeDuplicates = function () {
     let clearDulpicates = new Set(cityHistory)
     cityHistory = Array.from(clearDulpicates);
 }
 
+// displays search history as buttons that display each city
 let displayHistory = function () {
     removeDuplicates();
     $('#searchHistory').empty();
@@ -154,9 +166,11 @@ let displayHistory = function () {
     }
 }
 
+// run when opening site
 loadHistory();
 displayDate();
 
+// handle submissions
 $("#cityNameForm").submit(function (event) {
     event.preventDefault();
     fetchWeatherData(getCityName());
